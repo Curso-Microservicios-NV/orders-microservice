@@ -2,15 +2,18 @@ import { Controller, ParseUUIDPipe } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { OrdersService } from './orders.service';
 import { CreateOrderDto, OrderPaginationDto, ChangeOrderStatusDto } from './dto';
+import { catchError, firstValueFrom } from 'rxjs';
 
 
 @Controller('orders')
 export class OrdersController {
 
-  constructor(private readonly ordersService: OrdersService) {}
+  constructor(
+    private readonly ordersService: OrdersService,
+  ) {}
 
   @MessagePattern('createOrder')
-  create(@Payload() createOrderDto: CreateOrderDto) {
+  async create(@Payload() createOrderDto: CreateOrderDto) {
     return this.ordersService.create(createOrderDto);
   }
 
