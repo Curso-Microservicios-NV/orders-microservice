@@ -2,7 +2,6 @@ import { Controller, ParseUUIDPipe } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { OrdersService } from './orders.service';
 import { CreateOrderDto, OrderPaginationDto, ChangeOrderStatusDto } from './dto';
-import { catchError, firstValueFrom } from 'rxjs';
 
 
 @Controller('orders')
